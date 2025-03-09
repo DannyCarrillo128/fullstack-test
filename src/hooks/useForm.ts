@@ -13,6 +13,10 @@ export const useForm = <T>(fields: T) => {
     });
   };
 
-  return { ...formState, formState, onInputChange };
+  const onReset = () => {
+      setFormState(fields);
+    };
+
+  return { ...formState, formState, onInputChange, onReset };
 
 };
