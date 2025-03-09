@@ -15,6 +15,7 @@ const typeDefs = `#graphql
     concept: String
     createdAt: String
     userId: String
+    user: User
   }
 
   type Query {

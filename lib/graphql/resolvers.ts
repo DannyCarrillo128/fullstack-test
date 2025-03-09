@@ -14,12 +14,19 @@ const resolvers = {
     },
 
     getMovements: async (parent: any, args: any, context: Context) => {
-      return await context.prisma.movement.findMany();
+      return await context.prisma.movement.findMany({
+        include: {
+          user: true
+        }
+      });
     },
     getMovementById: async (parent: any, args: any, context: Context) => {
       return await context.prisma.movement.findUnique({
         where: {
           id: args.id
+        },
+        include: {
+          user: true
         }
       });
     }
@@ -62,6 +69,9 @@ const resolvers = {
           concept: args.concept,
           createdAt: args.createdAt,
           userId: args.userId
+        },
+        include: {
+          user: true
         }
       });
     },
