@@ -1,4 +1,4 @@
-import type { FormEvent } from 'react';
+import { useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/router';
 
 import { useMutation, useQuery } from '@apollo/client';
@@ -12,16 +12,25 @@ export const UserPage = () => {
   const router = useRouter();
   const { user_id } = router.query;
 
+  const { name, role, onInputChange, setFormState } = useForm({
+    name: '',
+    role: ''
+  });
+
   const { data, loading, error } = useQuery(GET_USER_BY_ID, {
     variables: { id: user_id }
   });
 
   const user = data?.getUserById;
 
-  const { name, role, onInputChange } = useForm({
-    name: user.name,
-    role: user.role
-  });
+  useEffect(() => {
+    if (user) {
+      setFormState({
+        name: user.name,
+        role: user.role
+      });
+    }
+  }, [user, setFormState]);
 
   const [updateUser] = useMutation(UPDATE_USER, {
     variables: { id: user_id, name, role }

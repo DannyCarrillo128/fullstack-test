@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export const useForm = <T>(fields: T) => {
 
   const [formState, setFormState] = useState(fields);
 
-  const onInputChange = (event: any) => {
+  const onInputChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
 
     setFormState({
@@ -17,6 +17,6 @@ export const useForm = <T>(fields: T) => {
       setFormState(fields);
     };
 
-  return { ...formState, formState, onInputChange, onReset };
+  return { ...formState, formState, setFormState, onInputChange, onReset  };
 
 };
