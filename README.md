@@ -1,40 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## How to deploy the project locally
+- Clone the repository ```git clone git@github.com:DannyCarrillo128/fullstack-test.git```.
+- Install dependencies with ```npm i```.
+- Create a ```.env``` file in the root directory and set the variables.
+- Copy and paste the following into your ```.env``` file:
 ```
+DATABASE_URL="postgresql://postgres:admin@db.xhrheteqianjswqfxvaa.supabase.co:5432/postgres"
+NEXT_PUBLIC_URL="http://localhost:3000"
+AUTH_SECRET="k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa"
+AUTH0_BASE_URL="http://localhost:3000"
+AUTH0_ISSUER_BASE_URL="https://dev-xjdograpogvrdpev.us.auth0.com"
+AUTH0_CLIENT_ID="29F4IEgu5jIuH3jIRsyIEu2Aw7AVFNi8"
+AUTH0_CLIENT_SECRET="PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGebKWYPS"
+```
+- Run the application using ```npm run dev```.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## How to deploy the project in Vercel
+- Host the project on GitHub or push changes to it.
+- Create an account on Vercel (preferably via GitHub).
+- In the Vercel dashboard, click on ***Add new project***.
+- Import the GitHub repository.
+- Set the production environment variables.
+- Copy and paste the following into each environment variable field:
+```
+DATABASE_URL: postgresql://postgres:admin@db.xhrheteqianjswqfxvaa.supabase.co:5432/postgres
+NEXT_PUBLIC_URL: https://fullstack-test-dusky.vercel.app/
+AUTH_SECRET: k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa
+AUTH0_BASE_URL: https://fullstack-test-dusky.vercel.app
+AUTH0_ISSUER_BASE_URL: https://dev-xjdograpogvrdpev.us.auth0.com
+AUTH0_CLIENT_ID: 29F4IEgu5jIuH3jIRsyIEu2Aw7AVFNi8
+AUTH0_CLIENT_SECRET: PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGebKWYPS
+```
+- Click on ***Deploy project***.
+- Visit the link that is generated: [FinanTrack](https://fullstack-test-dusky.vercel.app "FinanTrack").
