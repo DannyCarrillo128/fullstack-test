@@ -18,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import { CircleCheckBig, CircleX } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { ADD_MOVEMENT } from '../../../lib/graphql/mutations';
 import { useForm } from '@/hooks/useForm';
@@ -47,10 +49,32 @@ const NewMovement = () => {
         amount: Number(amount),
         createdAt: new Date(createdAt).toISOString()
       }
+    })
+    .then(() => {
+      onReset();
+      toast('Operación exitosa.', {
+        description: 'Movimiento registrado.',
+        icon: <CircleCheckBig />,
+        style: {
+          background: '#C2FFB5',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
+    })
+    .catch((error) => {
+      toast('Algo salió mal.', {
+        description: error || 'Parece que hubo un error.',
+        icon: <CircleX />,
+        style: {
+          background: '#FFB5C0',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
     });
 
-    alert('Movimiento registrado.');
-    onReset();
+    
   };  
 
   return (

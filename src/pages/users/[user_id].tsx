@@ -1,4 +1,4 @@
-import { useEffect, FormEvent, type ReactElement, ChangeEvent } from 'react';
+import { useEffect, FormEvent, type ReactElement } from 'react';
 import { useRouter } from 'next/router';
 
 import { useMutation, useQuery } from '@apollo/client';
@@ -20,6 +20,8 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
+import { CircleCheckBig, CircleX } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { UPDATE_USER } from '../../../lib/graphql/mutations';
 import { GET_USER_BY_ID } from '../../../lib/graphql/queries';
@@ -64,9 +66,29 @@ export const UserPage = () => {
         name,
         role
       }
+    })
+    .then(() => {
+      toast('Operación exitosa.', {
+        description: 'Usuario actualizado.',
+        icon: <CircleCheckBig />,
+        style: {
+          background: '#C2FFB5',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
+    })
+    .catch((error) => {
+      toast('Algo salió mal.', {
+        description: error || 'Parece que hubo un error.' ,
+        icon: <CircleX />,
+        style: {
+          background: '#FFB5C0',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
     });
-
-    alert('Usuario actualizado.');
   };
 
   return (

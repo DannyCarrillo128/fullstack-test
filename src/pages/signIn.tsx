@@ -27,6 +27,9 @@ const SignIn = () => {
       <div className="bg-amber-400"></div>
       <div className="grid items-center justify-center shadow-lg shadow-slate-500">
         <div className="w-full">
+          <div className="w-full flex justify-center">
+            <span className="text-5xl font-semibold whitespace-nowrap relative top-[-20px]">FinanTrack</span> {/* Movemos el span hacia arriba */}
+          </div>
           <form onSubmit={ handleSignIn }>
             <div className="flex items-center space-x-2 mb-4">
               <div className="relative">

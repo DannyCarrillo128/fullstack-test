@@ -20,7 +20,7 @@ const Home = () => {
     <div className="grid grid-cols-3 px-5">
       {
         items.map((item) => (
-          <div className="flex items-center justify-center mt-16">
+          <div key={ item.url } className="flex items-center justify-center mt-16">
             <Button
               onClick={ () => router.push(item.url) }
               className="w-45 h-45 flex flex-col items-center justify-center text-xl font-bold cursor-pointer">

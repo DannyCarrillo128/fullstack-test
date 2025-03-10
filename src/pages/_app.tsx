@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { Toaster } from '@/components/ui/sonner';
+
 import { Providers } from '../components/Providers';
 
 import '@/styles/globals.css';
@@ -27,6 +29,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Providers>
         { getLayout(<Component { ...pageProps } />) }
       </Providers>
+      <Toaster />
     </>
   );
 }
