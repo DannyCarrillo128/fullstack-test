@@ -25,10 +25,10 @@ AUTH0_CLIENT_SECRET="PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGeb
 - Copy and paste the following into each environment variable field:
 ```
 DATABASE_URL: postgresql://postgres:admin@db.xhrheteqianjswqfxvaa.supabase.co:5432/postgres
-NEXT_PUBLIC_URL: https://fullstack-test-dusky.vercel.app/
-GRAPHQL_URL="https://fullstack-test-dusky.vercel.app/api/graphql"
+NEXT_PUBLIC_URL: http://fullstack-test-dusky.vercel.app/
+GRAPHQL_URL="http://fullstack-test-dusky.vercel.app/api/graphql"
 AUTH_SECRET: k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa
-AUTH0_BASE_URL: https://fullstack-test-dusky.vercel.app
+AUTH0_BASE_URL: http://fullstack-test-dusky.vercel.app
 AUTH0_ISSUER_BASE_URL: https://dev-xjdograpogvrdpev.us.auth0.com
 AUTH0_CLIENT_ID: 29F4IEgu5jIuH3jIRsyIEu2Aw7AVFNi8
 AUTH0_CLIENT_SECRET: PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGebKWYPS
