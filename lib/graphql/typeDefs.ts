@@ -21,6 +21,7 @@ const typeDefs = `#graphql
   type Query {
     getUsers: [User]
     getUserById(id: ID!): User
+    getUserByEmail(email: String!): User
 
     getMovements: [Movement]
     getMovementById(id: ID!): Movement

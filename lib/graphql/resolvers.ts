@@ -12,6 +12,11 @@ const resolvers = {
         }
       });
     },
+    getUserByEmail: async (parent: any, args: any, context: Context) => {
+      return await context.prisma.user.findUnique({
+        where: { email: args.email }
+      });
+    },
 
     getMovements: async (parent: any, args: any, context: Context) => {
       return await context.prisma.movement.findMany({

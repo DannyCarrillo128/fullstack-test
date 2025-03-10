@@ -24,6 +24,17 @@ export const GET_USER_BY_ID = gql`
   }
 `;
 
+export const GET_USER_BY_EMAIL = gql`
+  query Query($email: String!) {
+    getUserByEmail(email: $email) {
+      id
+      name
+      email
+      password
+    }
+  }
+`;
+
 export const GET_MOVEMENTS = gql`
   query Query {
     getMovements {
