@@ -1,8 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: '/signIn', destination: '/', permanent: true }
+    ];
+  },
+  reactStrictMode: true
 };
 
 export default nextConfig;

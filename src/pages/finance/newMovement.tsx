@@ -1,18 +1,36 @@
-import type { FormEvent } from 'react';
+import { FormEvent, type ReactElement } from 'react';
 
 import { useMutation } from '@apollo/client';
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 
 import { ADD_MOVEMENT } from '../../../lib/graphql/mutations';
 import { useForm } from '@/hooks/useForm';
+import { Sidebar } from '@/components/Sidebar';
 
 const NewMovement = () => {
 
   const userId = '7e281eb2-cd59-4bff-a77b-639c804d2bdb'; // TODO: Get userId from LocalStorage (Auth)
 
-  const { concept, amount, createdAt, onInputChange, onReset } = useForm({
+  const { concept, amount, createdAt, onInputChange, onReset, setFormState } = useForm({
     concept: '',
     amount: 0,
-    createdAt: Date.now()
+    createdAt: ''
   });
 
   const [addMovement] = useMutation(ADD_MOVEMENT, {
@@ -31,39 +49,71 @@ const NewMovement = () => {
       }
     });
 
+    alert('Movimiento registrado.');
     onReset();
   };  
 
   return (
-    <>
-      <h1>Nuevo movimiento financiero</h1>
-      <form onSubmit={ handleAddMovement }>
-        <select
-          name="concept"
-          value={ concept }
-          onChange={ onInputChange }
-        >
-          <option value="">Elige el concepto</option>
-          <option value="income">Ingreso</option>
-          <option value="expense">Egreso</option>
-        </select>
-        <input
-          type="number"
-          name="amount"
-          value={ amount }
-          onChange={ onInputChange }
-        />
-        <input
-          type="datetime-local"
-          name="createdAt"
-          value={ createdAt }
-          onChange={ onInputChange }
-        />
-        <button type="submit">Crear</button>
-      </form>
-    </>
+    <Card className="flex items-center w-[500px]">
+      <CardHeader>
+        <CardTitle>Nuevo movimiento financiero</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={ handleAddMovement }>
+          <div className="grid w-full items-center gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Label>Concepto</Label>
+              <Select
+                name="concept"
+                value={ concept }
+                onValueChange={(value) => setFormState(prevState => ({ ...prevState, concept: value }))}
+              >
+                <SelectTrigger className="w-[300px]">
+                  <SelectValue placeholder="Elige el concepto" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="income">Ingreso</SelectItem>
+                    <SelectItem value="expense">Egreso</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label>Monto</Label>
+              <Input
+                type="number"
+                className="w-[300px]"
+                name="amount"
+                value={ amount }
+                onChange={ onInputChange }
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label>Fecha</Label>
+              <Input
+                type="datetime-local"
+                className="w-[300px]"
+                name="createdAt"
+                value={ createdAt }
+                onChange={ onInputChange }
+              />
+            </div>
+          </div>
+          <div className="grid justify-items-center p-4">
+            <Button type="submit">Guardar</Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 
+};
+
+NewMovement.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Sidebar>{ page }</Sidebar>
+  );
 };
 
 export default NewMovement;
