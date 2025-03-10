@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
       { source: '/signIn', destination: '/', permanent: true }
     ];
   },
+  env: {
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    GRAPHQL_URL: process.env.GRAPHQL_URL
+  },
   reactStrictMode: true
 };
 

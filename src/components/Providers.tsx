@@ -9,7 +9,7 @@ interface Props {
 export const Providers = ({ children }: Props) => {
 
   const client = new ApolloClient({
-    uri: process.env.GRAPHQL_URL || 'http://localhost:3000/api/graphql',
+    uri: process.env.GRAPHQL_URL,
     cache: new InMemoryCache(),
   });
 
