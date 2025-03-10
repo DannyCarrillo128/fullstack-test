@@ -7,7 +7,7 @@ interface Props {
 };
 
 export const Providers = ({ children }: Props) => {
-
+  console.log(process.env.GRAPHQL_URL);
   const client = new ApolloClient({
     uri: process.env.GRAPHQL_URL,
     cache: new InMemoryCache(),
