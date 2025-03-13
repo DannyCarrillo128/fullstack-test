@@ -24,7 +24,7 @@ AUTH0_CLIENT_SECRET="PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGeb
 - Set the production environment variables.
 - Copy and paste the following into each environment variable field:
 ```
-DATABASE_URL: postgresql://postgres:admin@db.xhrheteqianjswqfxvaa.supabase.co:5432/postgres
+DATABASE_URL: postgresql://postgres.xhrheteqianjswqfxvaa:admin@aws-0-us-west-1.pooler.supabase.com:5432/postgres
 NEXT_PUBLIC_URL: https://fullstack-test-delta.vercel.app/
 GRAPHQL_URL="https://fullstack-test-delta.vercel.app/api/graphql"
 AUTH_SECRET: k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa
