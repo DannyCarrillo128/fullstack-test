@@ -65,6 +65,16 @@ export const GET_MOVEMENT_BY_ID = gql`
   }
 `;
 
+export const GET_USERS_FINANCIALS = gql`
+  query Query {
+    getUsersFinancials {
+      name
+      incomes
+      expenses
+    }
+  }
+`;
+
 export const GET_TOTAL_AMOUNT = gql`
   query Query {
     getTotalAmount

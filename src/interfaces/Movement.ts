@@ -8,3 +8,9 @@ export interface Movement {
   userId?: string;
   user?: User;
 }
+
+export interface Financials {
+  name: string;
+  incomes: number;
+  expenses: number;
+}

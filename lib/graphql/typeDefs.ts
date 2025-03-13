@@ -18,6 +18,12 @@ const typeDefs = `#graphql
     user: User
   }
 
+  type UserFinancials {
+    name: String
+    incomes: Int
+    expenses: Int
+  }
+
   type Query {
     getUsers: [User]
     getUserById(id: ID!): User
@@ -25,6 +31,7 @@ const typeDefs = `#graphql
 
     getMovements: [Movement]
     getMovementById(id: ID!): Movement
+    getUsersFinancials: [UserFinancials]
     getTotalAmount: Int
   }
 

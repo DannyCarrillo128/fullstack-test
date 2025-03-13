@@ -83,7 +83,7 @@ const Finance = () => {
               </TableBody>
               <TableFooter>
                 <TableRow>
-                  <TableCell colSpan={3}>Total</TableCell>
+                  <TableCell colSpan={ 3 }>Total</TableCell>
                   <TableCell>{ totalAmount ? totalAmount : 0 }</TableCell>
                 </TableRow>
               </TableFooter>

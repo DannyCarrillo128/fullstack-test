@@ -35,6 +35,40 @@ const resolvers = {
         }
       });
     },
+    getUsersFinancials: async (parent: any, args: any, context: Context) => {
+      const users = await context.prisma.user.findMany();
+
+      const userFinancials = await Promise.all(
+        users.map(async (user) => {
+          const totalIncomes = await context.prisma.movement.aggregate({
+            where: {
+              userId: user.id,
+              concept: 'income',
+            },
+            _sum: { amount: true }
+          });
+
+          const totalExpenses = await context.prisma.movement.aggregate({
+            where: {
+              userId: user.id,
+              concept: 'expense',
+            },
+            _sum: { amount: true }
+          });
+
+          let expenses = totalExpenses._sum.amount || 0;
+
+          if (expenses < 0) expenses = expenses * (-1)
+
+          return {
+            name: user.name,
+            incomes: totalIncomes._sum.amount || 0,
+            expenses
+          };
+      }));
+
+      return userFinancials;
+    },
     getTotalAmount: async (parent: any, args: any, context: Context) => {
       const total = await context.prisma.movement.aggregate({
         _sum: { amount: true }
