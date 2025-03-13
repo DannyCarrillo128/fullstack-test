@@ -16,12 +16,11 @@ import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 import { GET_USERS_FINANCIALS } from '../../../lib/graphql/queries';
 import { Sidebar } from '@/components/Sidebar';
-import { Financials } from '@/interfaces/Movement';
 
 export const Reports = () => {
 
-  const resp = useQuery(GET_USERS_FINANCIALS);
-  const financials: Financials[] = resp.data?.getUsersFinancials;
+  const { data } = useQuery(GET_USERS_FINANCIALS);
+  const financials = data?.getUsersFinancials;
 
   const chartConfig = {
     incomes: {
@@ -34,8 +33,28 @@ export const Reports = () => {
     },
   } satisfies ChartConfig;
 
-  const downloadCSV = () => {
-    console.log(financials);
+  const downloadCSV = async () => {
+    const csvData = financials.map(({ __typename, ...rest }: any) => rest);
+    
+    try {
+      const response = await fetch('/api/generate-csv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(csvData)
+      });
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Reporte.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -84,7 +103,7 @@ export const Reports = () => {
         : <>
             <div className="grid justify-items-center">
               <Skeleton className="w-[800px] h-[700px] rounded-xl" />
-              <Skeleton className="w-[300px] h-[50px] rounded-xl my-7" />
+              <Skeleton className="w-[150px] h-[50px] rounded-xl my-7" />
             </div>
           </>
       }
