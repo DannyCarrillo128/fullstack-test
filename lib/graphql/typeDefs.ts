@@ -25,6 +25,7 @@ const typeDefs = `#graphql
 
     getMovements: [Movement]
     getMovementById(id: ID!): Movement
+    getTotalAmount: Int
   }
 
   type Mutation {

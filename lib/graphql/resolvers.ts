@@ -34,6 +34,13 @@ const resolvers = {
           user: true
         }
       });
+    },
+    getTotalAmount: async (parent: any, args: any, context: Context) => {
+      const total = await context.prisma.movement.aggregate({
+        _sum: { amount: true }
+      });
+
+      return total._sum.amount || 0;
     }
   },
   Mutation: {

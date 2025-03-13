@@ -64,3 +64,9 @@ export const GET_MOVEMENT_BY_ID = gql`
     }
   }
 `;
+
+export const GET_TOTAL_AMOUNT = gql`
+  query Query {
+    getTotalAmount
+  }
+`;

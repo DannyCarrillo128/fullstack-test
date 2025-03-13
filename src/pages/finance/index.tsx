@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/table';
 import { Plus } from 'lucide-react';
 
-import { GET_MOVEMENTS } from '../../../lib/graphql/queries';
+import { GET_MOVEMENTS, GET_TOTAL_AMOUNT } from '../../../lib/graphql/queries';
 import { Sidebar } from '@/components/Sidebar';
 import { Movement } from '@/interfaces/Movement';
 
@@ -25,6 +25,9 @@ const Finance = () => {
 
   const { data, loading, error,  } = useQuery(GET_MOVEMENTS);
   const movements: Movement[] = data?.getMovements;
+
+  const resp = useQuery(GET_TOTAL_AMOUNT);
+  const totalAmount: number = resp.data?.getTotalAmount;
 
   const formatDate = (createdAt: string) => {
     return new Date(Number(createdAt)).toLocaleString();
@@ -81,7 +84,7 @@ const Finance = () => {
               <TableFooter>
                 <TableRow>
                   <TableCell colSpan={3}>Total</TableCell>
-                  <TableCell>1000000</TableCell>
+                  <TableCell>{ totalAmount ? totalAmount : 0 }</TableCell>
                 </TableRow>
               </TableFooter>
             </Table>
