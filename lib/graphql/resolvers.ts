@@ -68,9 +68,15 @@ const resolvers = {
     },
 
     addMovement: async (parent: any, args: any, context: Context) => {
+      let amount = args.amount;
+
+      if (args.concept === 'expense') {
+        amount = amount*(-1);
+      }
+
       return await context.prisma.movement.create({
         data: {
-          amount: args.amount,
+          amount,
           concept: args.concept,
           createdAt: args.createdAt,
           userId: args.userId

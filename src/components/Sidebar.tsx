@@ -1,18 +1,38 @@
 import type { ReactElement } from 'react';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 import {
   DollarSign,
   UsersRound,
   FileChartColumnIncreasing,
-  LogOut
+  LogOut,
+  CircleX
 } from 'lucide-react';
+import { toast } from 'sonner';
 
 export interface Props {
   children?: ReactElement | ReactElement[];
 }
 
 export const Sidebar = ({ children }: Props) => {
+
+  const handleSignOut = async () => {
+    try {
+      await signOut({ callbackUrl: process.env.AUTH0_BASE_URL });
+    } catch(error) {
+      toast('Algo salió mal.', {
+        description: 'Parece que hubo un error.',
+        icon: <CircleX />,
+        style: {
+          background: '#FFB5C0',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -43,10 +63,10 @@ export const Sidebar = ({ children }: Props) => {
           </ul>
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-              <Link href="/" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <a onClick={ handleSignOut } className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <LogOut />
                 <span className="flex-1 ms-3 whitespace-nowrap">Cerrar sesión</span>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

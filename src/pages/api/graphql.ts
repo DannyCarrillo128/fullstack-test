@@ -12,8 +12,15 @@ export type Context = {
 
 const server = new ApolloServer({
   resolvers,
-  typeDefs
+  typeDefs,
+  introspection: true
 });
+
+export const config = {
+  api: {
+    bodyParser: false
+  },
+};
 
 export default startServerAndCreateNextHandler(server, {
   context: async (req, res) => ({ req, res, prisma })

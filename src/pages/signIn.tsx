@@ -1,25 +1,26 @@
-import { FormEvent } from 'react';
-import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { AtSign, Lock } from 'lucide-react';
-
-import { useForm } from '@/hooks/useForm';
+import { CircleX } from 'lucide-react';
+import { toast } from 'sonner';
 
 const SignIn = () => {
 
-  const router = useRouter();
-
-  const { email, password, formState, onInputChange } = useForm({
-    email: '',
-    password: ''
-  });
-
-  const handleSignIn = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(formState);
-    router.push('/home');
+  const handleSignIn = () => {
+    try {
+      signIn('auth0', { callbackUrl: '/home' });
+    } catch (error) {
+      toast('Algo salió mal.', {
+        description: 'Parece que hubo un error.',
+        icon: <CircleX />,
+        style: {
+          background: '#FFB5C0',
+          fontSize: '16px',
+          fontWeight: 'bold'
+        }
+      });
+      console.log(error);
+    }
   };
 
   return (
@@ -30,41 +31,9 @@ const SignIn = () => {
           <div className="w-full flex justify-center">
             <span className="text-5xl font-semibold whitespace-nowrap relative top-[-20px]">FinanTrack</span>
           </div>
-          <form onSubmit={ handleSignIn }>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="relative">
-                <div className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900">
-                  <AtSign />
-                </div>
-                <Input
-                  type="email"
-                  className="w-[300px] h-12 pl-10"
-                  name="email"
-                  placeholder="Correo electrónico"
-                  value={ email }
-                  onChange={ onInputChange }
-                />
-              </div>
-            </div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="relative">
-                <div className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-900">
-                  <Lock />
-                </div>
-                <Input
-                  type="password"
-                  className="w-[300px] h-12 pl-10"
-                  name="password"
-                  placeholder="Contraseña"
-                  value={ password }
-                  onChange={ onInputChange }
-                />
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <Button type="submit" className="w-[100px] h-10 text-lg">Ingresar</Button>
-            </div>
-          </form>
+          <div className="flex justify-center">
+            <Button onClick={ handleSignIn } type="button" className="w-[100px] h-10 text-lg">Ingresar</Button>
+          </div>
         </div>
       </div>
     </div>
