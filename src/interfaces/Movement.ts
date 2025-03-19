@@ -7,4 +7,4 @@ export interface Movement {
   createdAt: string;
   userId?: string;
   user?: User;
-}
+};

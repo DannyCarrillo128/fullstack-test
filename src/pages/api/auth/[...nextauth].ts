@@ -1,6 +1,8 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import Auth0Provider from 'next-auth/providers/auth0';
 
+import { getAuth0Roles } from '@/lib/auth0';
+
 export const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
@@ -20,10 +22,8 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     session: async ({ session, token }: any) => {
-      console.log({session});
-      console.log({token});
       if (token) {
-        session.user = token.user;
+        session.user.role = token.role;
         session.accessToken = token.accessToken;
         session.error = token.error;
       }
@@ -32,7 +32,9 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, account }) {
       if (account) {
+        const role = await getAuth0Roles(token.sub);
         token.accessToken = account.access_token;
+        token.role = role;
       }
 
       return token;

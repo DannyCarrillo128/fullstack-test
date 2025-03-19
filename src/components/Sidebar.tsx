@@ -2,36 +2,25 @@ import type { ReactElement } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 
-import {
-  DollarSign,
-  UsersRound,
-  FileChartColumnIncreasing,
-  LogOut,
-  CircleX
-} from 'lucide-react';
-import { toast } from 'sonner';
+import { LogOut } from 'lucide-react';
+
+import { useRole } from '@/hooks/useRole';
+import { MenuItem }  from '@/interfaces/MenuItem';
+import { Menu } from '../../public/menu';
 
 export interface Props {
   children?: ReactElement | ReactElement[];
-}
+};
 
 export const Sidebar = ({ children }: Props) => {
 
-  const handleSignOut = async () => {
-    try {
-      await signOut({ callbackUrl: process.env.AUTH0_BASE_URL });
-    } catch(error) {
-      toast('Algo salió mal.', {
-        description: 'Parece que hubo un error.',
-        icon: <CircleX />,
-        style: {
-          background: '#FFB5C0',
-          fontSize: '16px',
-          fontWeight: 'bold'
-        }
-      });
-      console.log(error);
-    }
+  const role = useRole() as 'user' | 'admin';
+
+  let items: MenuItem[] = [];
+  items = Menu[role];
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL });
   };
 
   return (
@@ -42,28 +31,24 @@ export const Sidebar = ({ children }: Props) => {
             <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">FinanTrack</span>
           </Link>
           <ul className="space-y-2 font-medium">
-            <li>
-              <Link href="/finance" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <DollarSign />
-                <span className="ms-3">Movimientos</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/users" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <UsersRound />
-                <span className="flex-1 ms-3 whitespace-nowrap">Usuarios</span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/reports" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <FileChartColumnIncreasing />
-                <span className="flex-1 ms-3 whitespace-nowrap">Reportes</span>
-              </Link>
-            </li>
+            {
+              items.length > 0 &&
+              items.map((item: MenuItem, index: number) => (
+                <li key={ index }>
+                  <Link
+                    href={ item.url }
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  >
+                    <item.icon />
+                    <span className="ms-3">{ item.title }</span>
+                  </Link>
+                </li>
+              ))
+            }
           </ul>
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
             <li>
-              <a onClick={ handleSignOut } className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+              <a onClick={ handleSignOut } className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
                 <LogOut />
                 <span className="flex-1 ms-3 whitespace-nowrap">Cerrar sesión</span>
               </a>

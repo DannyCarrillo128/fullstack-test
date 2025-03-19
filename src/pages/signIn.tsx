@@ -1,26 +1,23 @@
-import { signIn } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
-import { CircleX } from 'lucide-react';
-import { toast } from 'sonner';
+
 
 const SignIn = () => {
 
-  const handleSignIn = () => {
-    try {
-      signIn('auth0', { callbackUrl: '/home' });
-    } catch (error) {
-      toast('Algo salió mal.', {
-        description: 'Parece que hubo un error.',
-        icon: <CircleX />,
-        style: {
-          background: '#FFB5C0',
-          fontSize: '16px',
-          fontWeight: 'bold'
-        }
-      });
-      console.log(error);
+  const router = useRouter();
+  const { status } = useSession();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/home');
     }
+  }, [status]);
+
+  const handleSignIn = () => {
+    signIn('auth0');
   };
 
   return (

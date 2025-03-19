@@ -2,19 +2,20 @@ import type { ReactElement } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { DollarSign, FileChartColumnIncreasing, UsersRound } from 'lucide-react';
 
 import { Sidebar } from '@/components/Sidebar';
+import { useRole } from '@/hooks/useRole';
+import { MenuItem } from '@/interfaces/MenuItem';
+import { Menu } from '../../../public/menu';
 
 const Home = () => {
 
   const router = useRouter();
 
-  const items = [
-    { title: "Movimientos", url: '/finance', icon: DollarSign },
-    { title: "Usuarios", url: "/users", icon: UsersRound },
-    { title: "Reportes", url: "/reports", icon: FileChartColumnIncreasing }
-  ];
+  const role = useRole() as 'user' | 'admin';
+  
+  let items: MenuItem[] = [];
+  items = Menu[role];
 
   return (
     <div className="grid grid-cols-3 px-5">

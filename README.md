@@ -7,11 +7,12 @@
 DATABASE_URL="postgresql://postgres:admin@db.xhrheteqianjswqfxvaa.supabase.co:5432/postgres"
 NEXT_PUBLIC_URL="http://localhost:3000"
 GRAPHQL_URL="http://localhost:3000/api/graphql"
-AUTH_SECRET="k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa"
+NEXTAUTH_SECRET="k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa"
 AUTH0_BASE_URL="http://localhost:3000"
 AUTH0_ISSUER_BASE_URL="https://dev-xjdograpogvrdpev.us.auth0.com"
 AUTH0_CLIENT_ID="29F4IEgu5jIuH3jIRsyIEu2Aw7AVFNi8"
 AUTH0_CLIENT_SECRET="PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGebKWYPS"
+AUTH0_MANAGEMENT_API_TOKEN=""
 ```
 - Run the application using ```npm run dev```.
 
@@ -26,12 +27,13 @@ AUTH0_CLIENT_SECRET="PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGeb
 ```
 DATABASE_URL: postgresql://postgres.xhrheteqianjswqfxvaa:admin@aws-0-us-west-1.pooler.supabase.com:5432/postgres
 NEXT_PUBLIC_URL: https://fullstack-test-delta.vercel.app/
-GRAPHQL_URL="https://fullstack-test-delta.vercel.app/api/graphql"
-AUTH_SECRET: k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa
+GRAPHQL_URL: https://fullstack-test-delta.vercel.app/api/graphql
+NEXTAUTH_SECRET: k1q3d096u5sd3737f8sa1sf3i51df38gf1h5g35j7em5127sa
 AUTH0_BASE_URL: https://fullstack-test-delta.vercel.app
 AUTH0_ISSUER_BASE_URL: https://dev-xjdograpogvrdpev.us.auth0.com
 AUTH0_CLIENT_ID: 29F4IEgu5jIuH3jIRsyIEu2Aw7AVFNi8
 AUTH0_CLIENT_SECRET: PcnQNwUG-7dSHM8sqShRUQtxEcVd46a60vESrEEoSvvde6aKgkygAAgkGebKWYPS
+AUTH0_MANAGEMENT_API_TOKEN:
 ```
 - Click on ***Deploy project***.
 - Visit the link that is generated: [FinanTrack](https://fullstack-test-delta.vercel.app "FinanTrack").
