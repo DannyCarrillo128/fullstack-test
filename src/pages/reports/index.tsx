@@ -102,7 +102,7 @@ export const Reports = () => {
           </>
         : <>
             <div className="grid justify-items-center">
-              <Skeleton className="w-[800px] h-[700px] rounded-xl" />
+              <Skeleton className="w-[800px] h-[500px] rounded-xl" />
               <Skeleton className="w-[150px] h-[50px] rounded-xl my-7" />
             </div>
           </>

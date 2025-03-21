@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
 
 import { Toaster } from '@/components/ui/sonner';
+import NextNProgress from 'nextjs-progressbar';
 
 import { Providers } from '../components/Providers';
 
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       </Head>
       <SessionProvider session={ session }>
         <Providers>
+          <NextNProgress color="#ffb900" />
           { getLayout(<Component { ...pageProps } />) }
         </Providers>
       </SessionProvider>
